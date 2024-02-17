@@ -1,1793 +1,201 @@
-This is free and unencumbered software released into the public domain.
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
+   1. Definitions.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
 
-For more information, please refer to <https://unlicense.org>
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "private_outputs": true,
-      "provenance": [],
-      "mount_file_id": "1uRhn4-8fQj3VFyfr9R8Otr-2WhfZmYNe",
-      "authorship_tag": "ABX9TyNo1YugK0ciENUvTiPPyWOZ",
-      "include_colab_link": true
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "cells": [
-    {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "view-in-github",
-        "colab_type": "text"
-      },
-      "source": [
-        "<a href=\"https://colab.research.google.com/github/lsdm83114/Illumex/blob/main/Cesar.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "execution_count": null,
-      "metadata": {
-        "id": "jpkAqdrElscg"
-      },
-      "outputs": [],
-      "source": [
-        "#cesar-Active-illuminati-28_\n",
-        "666"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "12345"
-      ],
-      "metadata": {
-        "id": "G_s7GPxlv88s"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [],
-      "metadata": {
-        "id": "tdMfE9V_wGIL"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "# New Section"
-      ],
-      "metadata": {
-        "id": "_tVn0tvtwXeM"
-      }
-    },
-    {
-      "cell_type": "markdown",
-      "source": [],
-      "metadata": {
-        "id": "wsx7cye4uHZ7"
-      }
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "Infused"
-      ],
-      "metadata": {
-        "id": "HHnn4S5q1bb8"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from IPython.display import display, Javascript\n",
-        "from google.colab.output import eval_js\n",
-        "from base64 import b64decode\n",
-        "\n",
-        "def take_photo(filename='photo.jpg', quality=0.8):\n",
-        "  js = Javascript('''\n",
-        "    async function takePhoto(quality) {\n",
-        "      const div = document.createElement('div');\n",
-        "      const capture = document.createElement('button');\n",
-        "      capture.textContent = 'Capture';\n",
-        "      div.appendChild(capture);\n",
-        "\n",
-        "      const video = document.createElement('video');\n",
-        "      video.style.display = 'block';\n",
-        "      const stream = await navigator.mediaDevices.getUserMedia({video: true});\n",
-        "\n",
-        "      document.body.appendChild(div);\n",
-        "      div.appendChild(video);\n",
-        "      video.srcObject = stream;\n",
-        "      await video.play();\n",
-        "\n",
-        "      // Resize the output to fit the video element.\n",
-        "      google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);\n",
-        "\n",
-        "      // Wait for Capture to be clicked.\n",
-        "      await new Promise((resolve) => capture.onclick = resolve);\n",
-        "\n",
-        "      const canvas = document.createElement('canvas');\n",
-        "      canvas.width = video.videoWidth;\n",
-        "      canvas.height = video.videoHeight;\n",
-        "      canvas.getContext('2d').drawImage(video, 0, 0);\n",
-        "      stream.getVideoTracks()[0].stop();\n",
-        "      div.remove();\n",
-        "      return canvas.toDataURL('image/jpeg', quality);\n",
-        "    }\n",
-        "    ''')\n",
-        "  display(js)\n",
-        "  data = eval_js('takePhoto({})'.format(quality))\n",
-        "  binary = b64decode(data.split(',')[1])\n",
-        "  with open(filename, 'wb') as f:\n",
-        "    f.write(binary)\n",
-        "  return filename"
-      ],
-      "metadata": {
-        "id": "mNgODuJUxUvb"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "%%javascript\n",
-        "const listenerChannel = new BroadcastChannel('channel');\n",
-        "listenerChannel.onmessage = (msg) => {\n",
-        "  const div = document.createElement('div');\n",
-        "  div.textContent = msg.data;\n",
-        "  document.body.appendChild(div);\n",
-        "};"
-      ],
-      "metadata": {
-        "id": "9rmd6VVFxdH1"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "js_code = '''\n",
-        "document.querySelector(\"#output-area\").appendChild(document.createTextNode(\"hello world!\"));\n",
-        "'''\n",
-        "display(IPython.display.Javascript(js_code))"
-      ],
-      "metadata": {
-        "id": "MIaCROPBxfHg"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "from google.colab import output\n",
-        "\n",
-        "display(IPython.display.Javascript('''\n",
-        "  window.someValue = new Promise(resolve => {\n",
-        "    setTimeout(() => {\n",
-        "      resolve(\"hello world!\");\n",
-        "    }, 100);\n",
-        "  });\n",
-        "'''))\n",
-        "\n",
-        "\n",
-        "value = output.eval_js('someValue');\n",
-        "value"
-      ],
-      "metadata": {
-        "id": "D_pVB_U3xiG6"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "from google.colab import output\n",
-        "\n",
-        "display(IPython.display.Javascript('''\n",
-        "  window.someValue = new Promise(resolve => {\n",
-        "    setTimeout(() => {\n",
-        "      resolve(\"hello world!\");\n",
-        "    }, 100);\n",
-        "  });\n",
-        "'''))\n",
-        "\n",
-        "\n",
-        "value = output.eval_js('someValue');\n",
-        "value"
-      ],
-      "metadata": {
-        "id": "ZxVJMv1uxisJ"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# @title Give me a name {display-mode: \"form\"}\n",
-        "\n",
-        "# This code will be hidden when the notebook is loaded."
-      ],
-      "metadata": {
-        "id": "n4z4_J3LxkIv"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "from google.colab import output\n",
-        "\n",
-        "def Concat(a, b):\n",
-        "  # Use display.JSON to transfer a structured result.\n",
-        "  return IPython.display.JSON({'result': ' '.join((a, b))})\n",
-        "\n",
-        "output.register_callback('notebook.Concat', Concat)"
-      ],
-      "metadata": {
-        "id": "zx4LKp2qGz-P"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "%%javascript\n",
-        "(async function() {\n",
-        "  const result = await google.colab.kernel.invokeFunction(\n",
-        "    'notebook.Concat', // The callback name.\n",
-        "    ['hello', 'world!'], // The arguments.\n",
-        "    {}); // kwargs\n",
-        "  const text = result.data['application/json'];\n",
-        "  document.querySelector(\"#output-area\").appendChild(document.createTextNode(text.result));\n",
-        "})();"
-      ],
-      "metadata": {
-        "id": "3Zgre5dwGz-R"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "from google.colab import output\n",
-        "\n",
-        "display(IPython.display.HTML('''\n",
-        "    The items:\n",
-        "    <br><ol id=\"items\"></ol>\n",
-        "    <button id='button'>Click to add</button>\n",
-        "    <script>\n",
-        "      document.querySelector('#button').onclick = () => {\n",
-        "        google.colab.kernel.invokeFunction('notebook.AddListItem', [], {});\n",
-        "      };\n",
-        "    </script>\n",
-        "    '''))\n",
-        "\n",
-        "def add_list_item():\n",
-        "  # Use redirect_to_element to direct the elements which are being written.\n",
-        "  with output.redirect_to_element('#items'):\n",
-        "    # Use display to add items which will be persisted on notebook reload.\n",
-        "    display(IPython.display.HTML('<li> Another item</li>'))\n",
-        "\n",
-        "output.register_callback('notebook.AddListItem', add_list_item)"
-      ],
-      "metadata": {
-        "id": "t_GccxprGz-S"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "import uuid\n",
-        "from google.colab import output\n",
-        "\n",
-        "class InvokeButton(object):\n",
-        "  def __init__(self, title, callback):\n",
-        "    self._title = title\n",
-        "    self._callback = callback\n",
-        "\n",
-        "  def _repr_html_(self):\n",
-        "    callback_id = 'button-' + str(uuid.uuid4())\n",
-        "    output.register_callback(callback_id, self._callback)\n",
-        "\n",
-        "    template = \"\"\"<button id=\"{callback_id}\">{title}</button>\n",
-        "        <script>\n",
-        "          document.querySelector(\"#{callback_id}\").onclick = (e) => {{\n",
-        "            google.colab.kernel.invokeFunction('{callback_id}', [], {{}})\n",
-        "            e.preventDefault();\n",
-        "          }};\n",
-        "        </script>\"\"\"\n",
-        "    html = template.format(title=self._title, callback_id=callback_id)\n",
-        "    return html\n",
-        "\n",
-        "def do_something():\n",
-        "  print('here')\n",
-        "\n",
-        "InvokeButton('click me', do_something)"
-      ],
-      "metadata": {
-        "id": "bLAoP-DgGz-T"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from IPython.display import display, Javascript\n",
-        "from google.colab.output import eval_js\n",
-        "from base64 import b64decode\n",
-        "\n",
-        "def take_photo(filename='photo.jpg', quality=0.8):\n",
-        "  js = Javascript('''\n",
-        "    async function takePhoto(quality) {\n",
-        "      const div = document.createElement('div');\n",
-        "      const capture = document.createElement('button');\n",
-        "      capture.textContent = 'Capture';\n",
-        "      div.appendChild(capture);\n",
-        "\n",
-        "      const video = document.createElement('video');\n",
-        "      video.style.display = 'block';\n",
-        "      const stream = await navigator.mediaDevices.getUserMedia({video: true});\n",
-        "\n",
-        "      document.body.appendChild(div);\n",
-        "      div.appendChild(video);\n",
-        "      video.srcObject = stream;\n",
-        "      await video.play();\n",
-        "\n",
-        "      // Resize the output to fit the video element.\n",
-        "      google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);\n",
-        "\n",
-        "      // Wait for Capture to be clicked.\n",
-        "      await new Promise((resolve) => capture.onclick = resolve);\n",
-        "\n",
-        "      const canvas = document.createElement('canvas');\n",
-        "      canvas.width = video.videoWidth;\n",
-        "      canvas.height = video.videoHeight;\n",
-        "      canvas.getContext('2d').drawImage(video, 0, 0);\n",
-        "      stream.getVideoTracks()[0].stop();\n",
-        "      div.remove();\n",
-        "      return canvas.toDataURL('image/jpeg', quality);\n",
-        "    }\n",
-        "    ''')\n",
-        "  display(js)\n",
-        "  data = eval_js('takePhoto({})'.format(quality))\n",
-        "  binary = b64decode(data.split(',')[1])\n",
-        "  with open(filename, 'wb') as f:\n",
-        "    f.write(binary)\n",
-        "  return filename"
-      ],
-      "metadata": {
-        "id": "kGzfnpvfGosh"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from IPython.display import Image\n",
-        "try:\n",
-        "  filename = take_photo()\n",
-        "  print('Saved to {}'.format(filename))\n",
-        "\n",
-        "  # Show the image which was just taken.\n",
-        "  display(Image(filename))\n",
-        "except Exception as err:\n",
-        "  # Errors will be thrown if the user does not have a webcam or if they do not\n",
-        "  # grant the page permission to access it.\n",
-        "  print(str(err))"
-      ],
-      "metadata": {
-        "id": "8Jo4O2guGosj"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# https://pypi.python.org/pypi/pydot\n",
-        "!apt-get -qq install -y graphviz && pip install pydot\n",
-        "import pydot"
-      ],
-      "metadata": {
-        "id": "TEjP7qlKxpwq"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "from google.colab import output\n",
-        "\n",
-        "def Concat(a, b):\n",
-        "  # Use display.JSON to transfer a structured result.\n",
-        "  return IPython.display.JSON({'result': ' '.join((a, b))})\n",
-        "\n",
-        "output.register_callback('notebook.Concat', Concat)"
-      ],
-      "metadata": {
-        "id": "AOgzg03JxqbQ"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from IPython.display import Javascript\n",
-        "\n",
-        "def target_func(comm, msg):\n",
-        "  # Only send the response if it's the data we are expecting.\n",
-        "  if msg['content']['data'] == 'the data':\n",
-        "    comm.send({\n",
-        "          'response': 'got comm open!',\n",
-        "        }, None, msg['buffers']);\n",
-        "get_ipython().kernel.comm_manager.register_target('comm_target', target_func)\n",
-        "\n",
-        "Javascript('''\n",
-        "(async () => {\n",
-        "  const buffer = new Uint8Array(10);\n",
-        "  for (let i = 0; i < buffer.byteLength; ++i) {\n",
-        "    buffer[i] = i\n",
-        "  }\n",
-        "  const channel = await google.colab.kernel.comms.open('comm_target', 'the data', [buffer.buffer]);\n",
-        "  let success = false;\n",
-        "  for await (const message of channel.messages) {\n",
-        "    if (message.data.response == 'got comm open!') {\n",
-        "      const responseBuffer = new Uint8Array(message.buffers[0]);\n",
-        "      for (let i = 0; i < buffer.length; ++i) {\n",
-        "        if (responseBuffer[i] != buffer[i]) {\n",
-        "          console.error('comm buffer different at ' + i);\n",
-        "          return;\n",
-        "        }\n",
-        "      }\n",
-        "      // Close the channel once the expected message is received. This should\n",
-        "      // cause the messages iterator to complete and for the for-await loop to\n",
-        "      // end.\n",
-        "      channel.close();\n",
-        "    }\n",
-        "  }\n",
-        "  document.body.appendChild(document.createTextNode('done.'));\n",
-        "})()\n",
-        "''')"
-      ],
-      "metadata": {
-        "id": "qapfBnibxvD6"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import ipywidgets as widgets\n",
-        "\n",
-        "slider = widgets.IntSlider(20, min=0, max=100)\n",
-        "slider"
-      ],
-      "metadata": {
-        "id": "T_k8Ugauxw-A"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Authenticate.\n",
-        "from google.colab import auth\n",
-        "auth.authenticate_user()\n",
-        "\n",
-        "# Install Cloud Storage FUSE.\n",
-        "!echo \"deb https://packages.cloud.google.com/apt gcsfuse-`lsb_release -c -s` main\" | sudo tee /etc/apt/sources.list.d/gcsfuse.list\n",
-        "!curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -\n",
-        "!apt -qq update && apt -qq install gcsfuse"
-      ],
-      "metadata": {
-        "id": "6n4r8_zPx0my"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import drive\n",
-        "drive.mount('/gdrive')"
-      ],
-      "metadata": {
-        "id": "X8xRm16qx3pm"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import auth\n",
-        "auth.authenticate_user()\n",
-        "\n",
-        "# https://cloud.google.com/resource-manager/docs/creating-managing-projects\n",
-        "project_id = '[your Cloud Platform project ID]'\n",
-        "!gcloud config set project {project_id}"
-      ],
-      "metadata": {
-        "id": "HOigvBikx5pz"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import drive\n",
-        "drive.mount('/gdrive')\n",
-        "%cd /gdrive"
-      ],
-      "metadata": {
-        "id": "Huiz-dkYx8UZ"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import files\n",
-        "\n",
-        "uploaded = files.upload()\n",
-        "\n",
-        "for fn in uploaded.keys():\n",
-        "  print('User uploaded file \"{name}\" with length {length} bytes'.format(\n",
-        "      name=fn, length=len(uploaded[fn])))"
-      ],
-      "metadata": {
-        "id": "PrkajYPryIUS"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "\n",
-        "last_names = ['Connor', 'Connor', 'Reese']\n",
-        "first_names = ['Sarah', 'John', 'Kyle']\n",
-        "df = pd.DataFrame({\n",
-        "  'first_name': first_names,\n",
-        "  'last_name': last_names,\n",
-        "})\n",
-        "df"
-      ],
-      "metadata": {
-        "id": "Nih6knB1yLxg"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# prompt: Cesar Guadalupe velazquez hernandez\n",
-        "\n",
-        "df"
-      ],
-      "metadata": {
-        "id": "ni0u8UvQzf9I"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'first_name': ['Sarah', 'John', 'Kyle', 'Joe'],\n",
-        "  'last_name': ['Connor', 'Connor', 'Reese', 'Bonnot'],\n",
-        "})\n",
-        "df.set_index('last_name', inplace=True)\n",
-        "\n",
-        "df.loc[~df.index.duplicated(), :]"
-      ],
-      "metadata": {
-        "id": "WhrVf3JJyNIl"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'request': ['GET /index.html?baz=3', 'GET /foo.html?bar=1'],\n",
-        "})\n",
-        "\n",
-        "df['request'].str.extract('GET /([^?]+)\\?', expand=True)"
-      ],
-      "metadata": {
-        "id": "SEfmcFQZyQ6j"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "This code transforms or splits the dictionary column into many columns.\n",
-        "\n",
-        "E.g. The output DataFrame of this cell will have columns named [`date, letter, fruit, weather`]."
-      ],
-      "metadata": {
-        "id": "Ywt_3-CVyOmW"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'time': ['2022-09-14 00:52:00-07:00', '2022-09-14 00:52:30-07:00',\n",
-        "           '2022-09-14 01:52:30-07:00'],\n",
-        "  'letter': ['A', 'B', 'C'],\n",
-        "})\n",
-        "df['time'] = pd.to_datetime(df.time)\n",
-        "df.set_index('time', inplace=True)\n",
-        "\n",
-        "df.loc['2022-09-14':'2022-09-14 00:53']"
-      ],
-      "metadata": {
-        "id": "r7CoJGKKySMe"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'time': ['2022-09-14 00:52:00-07:00', '2022-09-14 00:52:30-07:00',\n",
-        "           '2022-09-14 01:52:30-07:00'],\n",
-        "  'letter': ['A', 'B', 'C'],\n",
-        "})\n",
-        "df['time'] = pd.to_datetime(df.time)\n",
-        "\n",
-        "def rows_in_time_range(df, time_column, start_ts_str, timedelta_str):\n",
-        "  # Return rows from df, where start_ts < time_column <= start_ts + delta.\n",
-        "  # start_ts_str can be a date '2022-09-01' or a time '2022-09-14 00:52:00-07:00'\n",
-        "  # timedelta_str examples: '2 minutes'  '2 days 2 hours 15 minutes 30 seconds'\n",
-        "  start_ts = pd.Timestamp(start_ts_str).tz_localize('US/Pacific')\n",
-        "  end_ts = start_ts + pd.to_timedelta(timedelta_str)\n",
-        "  return df.query(\"@start_ts <= {0} < @end_ts\".format(time_column))\n",
-        "\n",
-        "rows_in_time_range(df, 'time', '2022-09-14 00:00', '52 minutes 31 seconds')"
-      ],
-      "metadata": {
-        "id": "DiaA6Z_IyT7r"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'first_name': ['Sarah', 'John', 'Kyle', 'Joe'],\n",
-        "  'last_name': ['Connor', 'Connor', 'Reese', 'Bonnot'],\n",
-        "})\n",
-        "\n",
-        "df.loc[:, df.columns!='last_name']"
-      ],
-      "metadata": {
-        "id": "hBTA_PfcyU__"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "terminator_df = pd.DataFrame({\n",
-        "  'first_name': ['Sarah', 'John', 'Kyle'],\n",
-        "  'last_name': ['Connor', 'Connor', 'Reese'],\n",
-        "})\n",
-        "terminator_df.set_index('first_name', inplace=True)\n",
-        "\n",
-        "buckaroo_df = pd.DataFrame({\n",
-        "  'first_name': ['John', 'John', 'Buckaroo'],\n",
-        "  'last_name': ['Parker', 'Whorfin', 'Banzai'],\n",
-        "})\n",
-        "buckaroo_df.set_index('first_name', inplace=True)\n",
-        "\n",
-        "terminator_df.index.intersection(buckaroo_df.index).shape"
-      ],
-      "metadata": {
-        "id": "ZVlSz4YeyWnU"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'first_name': ['Sarah', 'John', 'Kyle', 'Joe'],\n",
-        "  'last_name': ['Connor', 'Connor', 'Reese', 'Bonnot'],\n",
-        "})\n",
-        "\n",
-        "df[df.last_name.str.match('.*onno.*')]"
-      ],
-      "metadata": {
-        "id": "hvjOmpD0yYvU"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'time': ['2022-09-14 00:52:00-07:00', '2022-09-14 00:52:30-07:00',\n",
-        "           '2022-09-14 01:52:30-07:00'],\n",
-        "  'letter': ['A', 'B', 'C'],\n",
-        "})\n",
-        "df['time'] = pd.to_datetime(df.time)\n",
-        "\n",
-        "df.query('time >= \"2022-09-14 00:52:30-07:00\"')"
-      ],
-      "metadata": {
-        "id": "lYrTRf6DyaGU"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "Evaluate a variable as the value to find."
-      ],
-      "metadata": {
-        "id": "jyL83zE2ybNX"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'time': ['2022-09-14 00:52:00-07:00', '2022-09-14 00:52:30-07:00',\n",
-        "           '2022-09-14 01:52:30-07:00'],\n",
-        "  'letter': ['A', 'B', 'C'],\n",
-        "})\n",
-        "df['time'] = pd.to_datetime(df.time)\n",
-        "\n",
-        "begin_ts = '2022-09-14 00:52:00-07:00'\n",
-        "end_ts = '2022-09-14 00:54:00-07:00'\n",
-        "\n",
-        "df.query('@begin_ts <= time < @end_ts')"
-      ],
-      "metadata": {
-        "id": "ffisv9hzycTd"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "Evaluate a variable, to use its value as the name of a column in a query.\n",
-        "\n",
-        "E.g. Query for rows where `John` is the value in the column named `first_name`."
-      ],
-      "metadata": {
-        "id": "f6bA_lX_yeMF"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "    'Year': [2016, 2015, 2014, 2013, 2012],\n",
-        "    'Top Animal': ['Giant panda', 'Chicken', 'Pig', 'Turkey', 'Dog']\n",
-        "})\n",
-        "\n",
-        "df.rename(columns={\n",
-        "    'Year': 'Calendar Year',\n",
-        "    'Top Animal': 'Favorite Animal',\n",
-        "}, inplace=True)\n",
-        "df"
-      ],
-      "metadata": {
-        "id": "OQexg9k_ygSu"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from vega_datasets import data\n",
-        "stocks = data.stocks()\n",
-        "\n",
-        "import altair as alt\n",
-        "alt.Chart(stocks).mark_line().encode(\n",
-        "  x='date:T',\n",
-        "  y='price',\n",
-        "  color='symbol'\n",
-        ").interactive(bind_y=False)"
-      ],
-      "metadata": {
-        "id": "ZchmkqsKyiaI"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "# plot the dataset, referencing dataframe column names\n",
-        "import altair as alt\n",
-        "alt.Chart(cars).mark_bar().encode(\n",
-        "  x=alt.X('Miles_per_Gallon', bin=True),\n",
-        "  y='count()',\n",
-        "  color='Origin'\n",
-        ")"
-      ],
-      "metadata": {
-        "id": "fdDFkrbIykU1"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "import altair as alt\n",
-        "\n",
-        "points = alt.Chart(cars).mark_point().encode(\n",
-        "  x='Year:T',\n",
-        "  y='Miles_per_Gallon',\n",
-        "  color='Origin'\n",
-        ").properties(\n",
-        "  width=800\n",
-        ")\n",
-        "\n",
-        "lines = alt.Chart(cars).mark_line().encode(\n",
-        "  x='Year:T',\n",
-        "  y='mean(Miles_per_Gallon)',\n",
-        "  color='Origin'\n",
-        ").properties(\n",
-        "  width=800\n",
-        ").interactive(bind_y=False)\n",
-        "\n",
-        "points + lines"
-      ],
-      "metadata": {
-        "id": "Qacbp47PylVc"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "import altair as alt\n",
-        "\n",
-        "interval = alt.selection_interval()\n",
-        "\n",
-        "points = alt.Chart(cars).mark_point().encode(\n",
-        "  x='Horsepower',\n",
-        "  y='Miles_per_Gallon',\n",
-        "  color=alt.condition(interval, 'Origin', alt.value('lightgray'))\n",
-        ").properties(\n",
-        "  selection=interval\n",
-        ")\n",
-        "\n",
-        "histogram = alt.Chart(cars).mark_bar().encode(\n",
-        "  x='count()',\n",
-        "  y='Origin',\n",
-        "  color='Origin'\n",
-        ").transform_filter(interval)\n",
-        "\n",
-        "points & histogram"
-      ],
-      "metadata": {
-        "id": "6KF4TxBoymuk"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "import altair as alt\n",
-        "\n",
-        "interval = alt.selection_interval()\n",
-        "\n",
-        "base = alt.Chart(cars).mark_point().encode(\n",
-        "  y='Miles_per_Gallon',\n",
-        "  color=alt.condition(interval, 'Origin', alt.value('lightgray'))\n",
-        ").properties(\n",
-        "  selection=interval\n",
-        ")\n",
-        "\n",
-        "base.encode(x='Acceleration') | base.encode(x='Horsepower')"
-      ],
-      "metadata": {
-        "id": "gPBvafNZyoX5"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "# plot the dataset, referencing dataframe column names\n",
-        "import altair as alt\n",
-        "alt.Chart(cars).mark_point().encode(\n",
-        "  x='Horsepower',\n",
-        "  y='Miles_per_Gallon',\n",
-        "  color='Origin'\n",
-        ").interactive()"
-      ],
-      "metadata": {
-        "id": "RWsdlzZGypl2"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "import altair as alt\n",
-        "\n",
-        "interval = alt.selection_interval()\n",
-        "\n",
-        "alt.Chart(cars).mark_point().encode(\n",
-        "  x='Horsepower',\n",
-        "  y='Miles_per_Gallon',\n",
-        "  color=alt.condition(interval, 'Origin', alt.value('lightgray'))\n",
-        ").properties(\n",
-        "  selection=interval\n",
-        ")"
-      ],
-      "metadata": {
-        "id": "2MRmxA7hyq6I"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "# plot the dataset, referencing dataframe column names\n",
-        "import altair as alt\n",
-        "alt.Chart(cars).mark_bar().encode(\n",
-        "  x=alt.X('Miles_per_Gallon', bin=True),\n",
-        "  y='count()',\n",
-        ")"
-      ],
-      "metadata": {
-        "id": "0vKrZu0QysyR"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# load an example dataset\n",
-        "from vega_datasets import data\n",
-        "cars = data.cars()\n",
-        "\n",
-        "# plot the dataset, referencing dataframe column names\n",
-        "import altair as alt\n",
-        "alt.Chart(cars).mark_bar().encode(\n",
-        "  x='mean(Miles_per_Gallon)',\n",
-        "  y='Origin',\n",
-        "  color='Origin'\n",
-        ")"
-      ],
-      "metadata": {
-        "id": "6EzR_jwPyuLG"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import auth\n",
-        "auth.authenticate_user()"
-      ],
-      "metadata": {
-        "id": "mM1Qh4YSywg3"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import auth\n",
-        "auth.authenticate_user()"
-      ],
-      "metadata": {
-        "id": "59Y6toO-yy6x"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import output\n",
-        "output.enable_custom_widget_manager()"
-      ],
-      "metadata": {
-        "id": "uVpX0Oqyy2xc"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "An example of referencing these resources from outputs:"
-      ],
-      "metadata": {
-        "id": "-Wr5Agrhy5gg"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab.patches import cv2_imshow"
-      ],
-      "metadata": {
-        "id": "cPfln0wUy687"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import auth\n",
-        "auth.authenticate_user()\n",
-        "\n",
-        "import gspread\n",
-        "from google.auth import default\n",
-        "creds, _ = default()\n",
-        "\n",
-        "gc = gspread.authorize(creds)\n",
-        "\n",
-        "sh = gc.create('A new spreadsheet')\n",
-        "\n",
-        "# Open our new sheet and add some data.\n",
-        "worksheet = gc.open('A new spreadsheet').sheet1\n",
-        "\n",
-        "cell_list = worksheet.range('A1:C2')\n",
-        "\n",
-        "import random\n",
-        "for cell in cell_list:\n",
-        "  cell.value = random.randint(1, 10)\n",
-        "\n",
-        "worksheet.update_cells(cell_list)\n",
-        "# Go to https://sheets.google.com to see your new spreadsheet."
-      ],
-      "metadata": {
-        "id": "Z8BPNxfLy92L"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "\n",
-        "display(IPython.display.Javascript('''\n",
-        "  const promise = new Promise((resolve, reject) => {\n",
-        "    const script = document.createElement('script');\n",
-        "    script.src = 'data:,window.value = \"hello world!\"';\n",
-        "    script.onload = resolve;\n",
-        "    script.onerror = reject;\n",
-        "    document.head.appendChild(script);\n",
-        "  });\n",
-        "  // Pause subsequent outputs until the script has been loaded.\n",
-        "  google.colab.output.pauseOutputUntil(promise);\n",
-        "'''))\n",
-        "\n",
-        "display(IPython.display.Javascript('''\n",
-        "    // Can immediately reference scripts loaded earlier since\n",
-        "    // output processing was blocked on them.\n",
-        "    document.body.appendChild(document.createTextNode(window.value));\n",
-        "'''))"
-      ],
-      "metadata": {
-        "id": "FcQvsc2My_90"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "You can group timestamped data into intervals of arbitrary duration using a Grouper object to specify groupby instructions.  The `freq` parameter is a string that may contain an integer followed by an [offset alias](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases).  E.g. To see output for 2 minute long intervals:"
-      ],
-      "metadata": {
-        "id": "9BKHdb35zDTw"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'time': ['2022-09-01 00:00:01-07:00', '2022-09-01 00:00:02-07:00',\n",
-        "           '2022-09-01 00:01:00-07:00', '2022-09-01 00:02:00-07:00',\n",
-        "           '2022-09-01 00:03:00-07:00', '2022-09-01 00:04:00-07:00',\n",
-        "           '2022-09-01 00:05:00-07:00', '2022-09-01 00:07:00-07:00'],\n",
-        "  'requests': [1, 1, 1, 1, 1, 1, 1, 1],\n",
-        "})\n",
-        "df['time'] = pd.to_datetime(df.time)\n",
-        "\n",
-        "df.groupby(pd.Grouper(key='time', freq='2min')).sum()"
-      ],
-      "metadata": {
-        "id": "WsTkq2yTzDUU"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "For example, here we download and display a PNG image of the Colab logo:"
-      ],
-      "metadata": {
-        "id": "em3ZMQ2iy688"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "%%html\n",
-        "<link rel=\"stylesheet\" href=\"/nbextensions/google.colab/tabbar.css\">\n",
-        "<div class='goog-tab'>\n",
-        "  Some content\n",
-        "</div>"
-      ],
-      "metadata": {
-        "id": "fJhwIzg9y5gi"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import portpicker\n",
-        "import threading\n",
-        "import socket\n",
-        "import IPython\n",
-        "\n",
-        "from six.moves import socketserver\n",
-        "from six.moves import SimpleHTTPServer\n",
-        "\n",
-        "class V6Server(socketserver.TCPServer):\n",
-        "  address_family = socket.AF_INET6\n",
-        "\n",
-        "class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):\n",
-        "  def do_GET(self):\n",
-        "    self.send_response(200)\n",
-        "    # If the response should not be cached in the notebook for\n",
-        "    # offline access:\n",
-        "    # self.send_header('x-colab-notebook-cache-control', 'no-cache')\n",
-        "    self.end_headers()\n",
-        "    self.wfile.write(b'''\n",
-        "      document.querySelector('#output-area').appendChild(document.createTextNode('Script result!'));\n",
-        "    ''')\n",
-        "\n",
-        "port = portpicker.pick_unused_port()\n",
-        "\n",
-        "def server_entry():\n",
-        "    httpd = V6Server(('::', port), Handler)\n",
-        "    # Handle a single request then exit the thread.\n",
-        "    httpd.serve_forever()\n",
-        "\n",
-        "thread = threading.Thread(target=server_entry)\n",
-        "thread.start()\n",
-        "\n",
-        "# Display some HTML referencing the resource.\n",
-        "display(IPython.display.HTML('<script src=\"https://localhost:{port}/\"></script>'.format(port=port)))"
-      ],
-      "metadata": {
-        "id": "dc4xDWSLy5gj"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import output\n",
-        "output.serve_kernel_port_as_iframe(port)"
-      ],
-      "metadata": {
-        "id": "MDt2RCrGy5gk"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "This will create an iframe browsing the HTTP server hosted on the machine your kernel is running on.\n",
-        "\n",
-        "Alternatively to view the server in a separate browser tab:"
-      ],
-      "metadata": {
-        "id": "5c9EMI4Zy5gl"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import output\n",
-        "output.serve_kernel_port_as_window(port)"
-      ],
-      "metadata": {
-        "id": "dfvepGhsy5gm"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "The server will only be accessible to the executor of the notebook while the notebook is being viewed in Colab."
-      ],
-      "metadata": {
-        "id": "qqt7DbTfy5gn"
-      }
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "Support for third party widgets will remain active for the duration of the session. To disable support:"
-      ],
-      "metadata": {
-        "id": "DUY3XpxTy2xd"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from google.colab import output\n",
-        "output.disable_custom_widget_manager()"
-      ],
-      "metadata": {
-        "id": "B4iJhfcMy2xe"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "project_id = '[your project ID]'"
-      ],
-      "metadata": {
-        "id": "HztBZW3Hyy7I"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "project_id = '[your project ID]'"
-      ],
-      "metadata": {
-        "id": "6QpzVd3Oywg4"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame(data={\n",
-        "  'first_name': ['Sarah', 'John', 'Kyle'],\n",
-        "  'last_name': ['Connor', 'Connor', 'Reese'],\n",
-        "})\n",
-        "\n",
-        "column_name = 'first_name'\n",
-        "df.query(f\"`{column_name}` == 'John'\")"
-      ],
-      "metadata": {
-        "id": "LGvbPwnYyeMH"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'first_name': ['Sarah', 'John', 'Kyle'],\n",
-        "  'last_name': ['Connor', 'Connor', 'Reese'],\n",
-        "})\n",
-        "\n",
-        "foo = 'Connor'\n",
-        "df.query('last_name == @foo')"
-      ],
-      "metadata": {
-        "id": "_MaC2T0zybNZ"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import pandas as pd\n",
-        "df = pd.DataFrame({\n",
-        "  'date': ['2022-09-14', '2022-09-15', '2022-09-16'],\n",
-        "  'letter': ['A', 'B', 'C'],\n",
-        "  'dict' : [{ 'fruit': 'apple', 'weather': 'aces'},\n",
-        "            { 'fruit': 'banana', 'weather': 'bad'},\n",
-        "            { 'fruit': 'cantaloupe', 'weather': 'cloudy'}],\n",
-        "})\n",
-        "\n",
-        "pd.concat([df.drop(['dict'], axis=1), df['dict'].apply(pd.Series)], axis=1)"
-      ],
-      "metadata": {
-        "id": "gsCL0qtNyOmX"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Fetch a single <1MB file using the raw GitHub URL.\n",
-        "!curl --remote-name \\\n",
-        "     -H 'Accept: application/vnd.github.v3.raw' \\\n",
-        "     --location https://api.github.com/repos/jakevdp/PythonDataScienceHandbook/contents/notebooks/data/california_cities.csv"
-      ],
-      "metadata": {
-        "id": "HA2779HVx-cG"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Inspect the file we downloaded to /tmp\n",
-        "!cat /tmp/downloaded_from_gcs.txt"
-      ],
-      "metadata": {
-        "id": "KLOvMGXNx6qQ"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Download the file from a given Google Cloud Storage bucket.\n",
-        "!gsutil cp gs://{bucket_name}/file_to_download.txt /tmp/gsutil_download.txt\n",
-        "\n",
-        "# Print the result to make sure the transfer worked.\n",
-        "!cat /tmp/gsutil_download.txt"
-      ],
-      "metadata": {
-        "id": "bdtVCJRpx5p0"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "with open('/gdrive/My Drive/foo.txt', 'w') as f:\n",
-        "  f.write('Hello Google Drive!')\n",
-        "!cat '/gdrive/My Drive/foo.txt'"
-      ],
-      "metadata": {
-        "id": "G7dstqxUx3pn"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "You can mount an entire bucket, or a path location within that bucket.\n",
-        "The local path to mount it must exist."
-      ],
-      "metadata": {
-        "id": "AYhmd2lHx0m0"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Mount a Cloud Storage bucket or location, without the gs:// prefix.\n",
-        "mount_path = \"my-bucket\"  # or a location like \"my-bucket/path/to/mount\"\n",
-        "local_path = f\"/mnt/gs/{mount_path}\"\n",
-        "\n",
-        "!mkdir -p {local_path}\n",
-        "!gcsfuse --implicit-dirs {mount_path} {local_path}"
-      ],
-      "metadata": {
-        "id": "5by0yrNhx0m1"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Then you can access it like a local path.\n",
-        "!ls -lh {local_path}"
-      ],
-      "metadata": {
-        "id": "EW5zRdZZx0m4"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Import PyDrive and associated libraries.\n",
-        "# This only needs to be done once per notebook.\n",
-        "from pydrive.auth import GoogleAuth\n",
-        "from pydrive.drive import GoogleDrive\n",
-        "from google.colab import auth\n",
-        "from oauth2client.client import GoogleCredentials\n",
-        "\n",
-        "# Authenticate and create the PyDrive client.\n",
-        "# This only needs to be done once per notebook.\n",
-        "auth.authenticate_user()\n",
-        "gauth = GoogleAuth()\n",
-        "gauth.credentials = GoogleCredentials.get_application_default()\n",
-        "drive = GoogleDrive(gauth)\n",
-        "\n",
-        "# List .txt files in the root.\n",
-        "#\n",
-        "# Search query reference:\n",
-        "# https://developers.google.com/drive/v2/web/search-parameters\n",
-        "listed = drive.ListFile({'q': \"title contains '.txt' and 'root' in parents\"}).GetList()\n",
-        "for file in listed:\n",
-        "  print('title {}, id {}'.format(file['title'], file['id']))"
-      ],
-      "metadata": {
-        "id": "hUCQeOacxy6p"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import altair as alt\n",
-        "import ipywidgets as widgets\n",
-        "from vega_datasets import data\n",
-        "\n",
-        "source = data.stocks()\n",
-        "\n",
-        "stock_picker = widgets.SelectMultiple(\n",
-        "    options=source.symbol.unique(),\n",
-        "    value=list(source.symbol.unique()),\n",
-        "    description='Symbols')\n",
-        "\n",
-        "# The value of symbols will come from the stock_picker.\n",
-        "@widgets.interact(symbols=stock_picker)\n",
-        "def render(symbols):\n",
-        "  selected = source[source.symbol.isin(list(symbols))]\n",
-        "\n",
-        "  return alt.Chart(selected).mark_line().encode(\n",
-        "      x='date',\n",
-        "      y='price',\n",
-        "      color='symbol',\n",
-        "      strokeDash='symbol',\n",
-        "  )"
-      ],
-      "metadata": {
-        "id": "cIedNXDtxw-C"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from IPython.display import Javascript\n",
-        "display(Javascript('''\n",
-        "(async () => {\n",
-        "  google.colab.kernel.comms.registerTarget('comms_testing', (comm, message) => {\n",
-        "    comm.send('this is the response', {buffers: message.buffers});\n",
-        "    document.body.appendChild(document.createTextNode('comm opened.'))\n",
-        "  });\n",
-        "})()'''))\n",
-        "\n",
-        "from ipykernel import comm\n",
-        "buffer = b'hello world'\n",
-        "channel = comm.Comm(target_name='comms_testing', data={'foo': 1}, buffers=[buffer])\n",
-        "\n",
-        "message = None\n",
-        "def handle_message(msg):\n",
-        "  global message\n",
-        "  message = msg\n",
-        "\n",
-        "channel.on_msg(handle_message)"
-      ],
-      "metadata": {
-        "id": "IlMwVMm2xvD8"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "%%javascript\n",
-        "(async function() {\n",
-        "  const result = await google.colab.kernel.invokeFunction(\n",
-        "    'notebook.Concat', // The callback name.\n",
-        "    ['hello', 'world!'], // The arguments.\n",
-        "    {}); // kwargs\n",
-        "  const text = result.data['application/json'];\n",
-        "  document.querySelector(\"#output-area\").appendChild(document.createTextNode(text.result));\n",
-        "})();"
-      ],
-      "metadata": {
-        "id": "GoNFLoZxxqbS"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "from google.colab import output\n",
-        "\n",
-        "display(IPython.display.HTML('''\n",
-        "    The items:\n",
-        "    <br><ol id=\"items\"></ol>\n",
-        "    <button id='button'>Click to add</button>\n",
-        "    <script>\n",
-        "      document.querySelector('#button').onclick = () => {\n",
-        "        google.colab.kernel.invokeFunction('notebook.AddListItem', [], {});\n",
-        "      };\n",
-        "    </script>\n",
-        "    '''))\n",
-        "\n",
-        "def add_list_item():\n",
-        "  # Use redirect_to_element to direct the elements which are being written.\n",
-        "  with output.redirect_to_element('#items'):\n",
-        "    # Use display to add items which will be persisted on notebook reload.\n",
-        "    display(IPython.display.HTML('<li> Another item</li>'))\n",
-        "\n",
-        "output.register_callback('notebook.AddListItem', add_list_item)"
-      ],
-      "metadata": {
-        "id": "Tr2fiSROxqbT"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "import IPython\n",
-        "import uuid\n",
-        "from google.colab import output\n",
-        "\n",
-        "class InvokeButton(object):\n",
-        "  def __init__(self, title, callback):\n",
-        "    self._title = title\n",
-        "    self._callback = callback\n",
-        "\n",
-        "  def _repr_html_(self):\n",
-        "    callback_id = 'button-' + str(uuid.uuid4())\n",
-        "    output.register_callback(callback_id, self._callback)\n",
-        "\n",
-        "    template = \"\"\"<button id=\"{callback_id}\">{title}</button>\n",
-        "        <script>\n",
-        "          document.querySelector(\"#{callback_id}\").onclick = (e) => {{\n",
-        "            google.colab.kernel.invokeFunction('{callback_id}', [], {{}})\n",
-        "            e.preventDefault();\n",
-        "          }};\n",
-        "        </script>\"\"\"\n",
-        "    html = template.format(title=self._title, callback_id=callback_id)\n",
-        "    return html\n",
-        "\n",
-        "def do_something():\n",
-        "  print('here')\n",
-        "\n",
-        "InvokeButton('click me', do_something)"
-      ],
-      "metadata": {
-        "id": "HI3C7-5ExqbU"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "!pip install matplotlib-venn"
-      ],
-      "metadata": {
-        "id": "UaLP9xxlxlMW"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "!apt-get -qq install -y libfluidsynth1"
-      ],
-      "metadata": {
-        "id": "KLVTDvL8xlMX"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "%%javascript\n",
-        "const senderChannel = new BroadcastChannel('channel');\n",
-        "senderChannel.postMessage('Hello world!');"
-      ],
-      "metadata": {
-        "id": "AA7ByMatxdH3"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from IPython.display import Image\n",
-        "try:\n",
-        "  filename = take_photo()\n",
-        "  print('Saved to {}'.format(filename))\n",
-        "\n",
-        "  # Show the image which was just taken.\n",
-        "  display(Image(filename))\n",
-        "except Exception as err:\n",
-        "  # Errors will be thrown if the user does not have a webcam or if they do not\n",
-        "  # grant the page permission to access it.\n",
-        "  print(str(err))"
-      ],
-      "metadata": {
-        "id": "YtktNY2exUvd"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "#\"use full power of brain capacity\"\n",
-        "#grant permission to self user cesar g velazquez Hernandez\n",
-        "#Task==json.format/status==true"
-      ],
-      "metadata": {
-        "id": "3KCqejczj6qP"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "This second cell will be in a separate sandboxed iframe.\n"
-      ],
-      "metadata": {
-        "id": "8Zu13OBFxdH2"
-      }
-    }
-  ]
-}
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
